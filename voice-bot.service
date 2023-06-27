@@ -1,0 +1,14 @@
+[Unit]
+Description=python script telegram bot text-to-speech
+After=network.target
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+startLimitIntervalSec=60
+WorkingDirectory=/var/opt/voice-bot/
+#PIDFile=/var/run/voice-bot.pid
+ExecStart=/usr/bin/python3.7  /var/opt/voice-bot/main.py
+
+[Install]
+WantedBy=multi-user.target
