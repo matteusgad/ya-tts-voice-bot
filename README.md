@@ -20,10 +20,10 @@ sudo apt install -y python3-venv python3-pip
 ### 2. Подготовка проекта
 Склонируйте или скопируйте проект в желаемую директорию, например:
 ```bash
-sudo mkdir -p /var/opt/voice-bot
-sudo chown -R "$USER":"$USER" /var/opt/voice-bot
-cp -r . /var/opt/voice-bot
-cd /var/opt/voice-bot
+sudo mkdir -p /opt/ya-tts-voice-bot/
+sudo chown -R "$USER":"$USER" /opt/ya-tts-voice-bot/
+cp -r . /opt/ya-tts-voice-bot
+cd /opt/ya-tts-voice-bot/
 ```
 
 Создайте и активируйте виртуальное окружение (рекомендуется):
@@ -61,7 +61,7 @@ cp example.config.py config.py
 
 Пример:
 ```
-CURREENT_DIR = '/var/opt/voice-bot'
+CURREENT_DIR = '/opt/ya-tts-voice-bot/'
 ```
 
 ### 5. Файл users.allow (белый список и администраторы)
@@ -92,31 +92,31 @@ python main.py
 Данные и настройки пользователей хранятся в SQLite-файле `voicebot.sqlite3` в директории `CURREENT_DIR`.
 
 ### 7. Запуск как systemd-сервис
-Отредактируйте `voice-bot.service` под вашу машину:
-- `WorkingDirectory` должен указывать на директорию проекта, например `/var/opt/voice-bot/`;
+Отредактируйте `ya-tts-voice-bot.service` под вашу машину:
+- `WorkingDirectory` должен указывать на директорию проекта, например `/opt/ya-tts-voice-bot/`;
 - `ExecStart` — путь к интерпретатору Python (рекомендуется использовать интерпретатор вашего venv) и `main.py`.
 
 Рекомендуемый вариант для venv:
 ```
-ExecStart=/var/opt/voice-bot/venv/bin/python /var/opt/voice-bot/main.py
+ExecStart=/opt/ya-tts-voice-bot/venv/bin/python /opt/ya-tts-voice-bot/main.py
 ```
 
 Установите и запустите сервис:
 ```bash
-sudo cp voice-bot.service /etc/systemd/system/voice-bot.service
+sudo cp ya-tts-voice-bot.service /etc/systemd/system/ya-tts-voice-bot.service
 sudo systemctl daemon-reload
-sudo systemctl enable voice-bot.service
-sudo systemctl start voice-bot.service
+sudo systemctl enable ya-tts-voice-bot.service
+sudo systemctl start ya-tts-voice-bot.service
 ```
 
 Проверка статуса и логов:
 ```bash
-sudo systemctl status voice-bot
-sudo journalctl -u voice-bot -f
+sudo systemctl status ya-tts-voice-bot
+sudo journalctl -u ya-tts-voice-bot -f
 ```
 
 Если сервис не стартует, проверьте:
-- корректность путей в `voice-bot.service` (особенно `WorkingDirectory` и `ExecStart`);
+- корректность путей в `ya-tts-voice-bot.service` (особенно `WorkingDirectory` и `ExecStart`);
 - что `config.py` заполнен и находится в рабочей директории;
 - права доступа на директорию и файлы (у пользователя systemd должно быть право читать/исполнять);
 - доступ к сети и корректные креды Yandex Cloud.
