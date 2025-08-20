@@ -4,8 +4,8 @@ TOKEN = 'QWERTYUIOPASDFGJKLZXCVBNMMQWERYUIIOASDFGHJKL'
 API_USER = 'XCVBNMFGHJKKL'
 API_KEY = 'ASDFGHJKL:QWERTYUIOPQWERTYUIOXCVBN'
 CURREENT_DIR = './'
-TEXT_USER_DENIED = 'Доступ запрещен, свяжитесь с @avmatte'
-TEXT_KNOCK_KNOCK = 'запрос в бота @dss_camera_screenshot_bot\n\n' \
+TEXT_USER_DENIED = 'Accsess denied call to @avmatte'
+TEXT_KNOCK_KNOCK = 'reauest @dss_camera_screenshot_bot\n\n' \
                     'id: {} \n' \
                     'username: {} \n' \
                     'first_name: {} \n' \
