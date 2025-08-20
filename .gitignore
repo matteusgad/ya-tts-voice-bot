@@ -1,3 +1,38 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual envs
+venv/
+.venv/
+.python-version
+
+# Editors/OS
+.idea/
+.vscode/
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Secrets and configs
+config.py
+.env
+.env.*
+*.secret
+*.key
+*.pem
+*.crt
+
+# Databases and stateful artifacts
+*.sqlite
+*.sqlite3
+*.db
+voicebot.sqlite3
+
+# Access control lists (may contain sensitive usernames/IDs)
+users.allow
 config.py
 venv
 __*
