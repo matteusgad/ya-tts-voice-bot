@@ -1,6 +1,7 @@
 import os
 import sqlite3
 from datetime import datetime
+from typing import Optional, List, Dict, Any
 
 
 DB_FILENAME = 'voicebot.sqlite3'
@@ -43,7 +44,7 @@ def init_db(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
-def upsert_user(conn: sqlite3.Connection, user_id: int, username: str | None, *, is_admin: bool = False, status: str | None = None) -> None:
+def upsert_user(conn: sqlite3.Connection, user_id: int, username: Optional[str], *, is_admin: bool = False, status: Optional[str] = None) -> None:
     cursor = conn.cursor()
     # Check existence
     cursor.execute("SELECT user_id FROM users WHERE user_id = ?", (user_id,))
@@ -81,20 +82,20 @@ def set_admin(conn: sqlite3.Connection, user_id: int, is_admin: bool) -> None:
     conn.commit()
 
 
-def get_user(conn: sqlite3.Connection, user_id: int) -> dict | None:
+def get_user(conn: sqlite3.Connection, user_id: int) -> Optional[Dict[str, Any]]:
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM users WHERE user_id = ?", (user_id,))
     row = cursor.fetchone()
     return dict(row) if row else None
 
 
-def get_admin_ids(conn: sqlite3.Connection) -> list[int]:
+def get_admin_ids(conn: sqlite3.Connection) -> List[int]:
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM users WHERE is_admin = 1")
     return [r[0] for r in cursor.fetchall()]
 
 
-def get_settings(conn: sqlite3.Connection, user_id: int, *, default_voice: str, default_speed: float, default_emotion: str) -> dict:
+def get_settings(conn: sqlite3.Connection, user_id: int, *, default_voice: str, default_speed: float, default_emotion: str) -> Dict[str, Any]:
     cursor = conn.cursor()
     cursor.execute("SELECT voice, speed, emotion FROM settings WHERE user_id = ?", (user_id,))
     row = cursor.fetchone()
@@ -107,7 +108,7 @@ def get_settings(conn: sqlite3.Connection, user_id: int, *, default_voice: str, 
     return {'voice': default_voice, 'speed': float(default_speed), 'emotion': default_emotion}
 
 
-def update_settings(conn: sqlite3.Connection, user_id: int, *, voice: str | None = None, speed: float | None = None, emotion: str | None = None) -> None:
+def update_settings(conn: sqlite3.Connection, user_id: int, *, voice: Optional[str] = None, speed: Optional[float] = None, emotion: Optional[str] = None) -> None:
     cursor = conn.cursor()
     cursor.execute("SELECT user_id FROM settings WHERE user_id = ?", (user_id,))
     exists = cursor.fetchone() is not None
@@ -116,7 +117,7 @@ def update_settings(conn: sqlite3.Connection, user_id: int, *, voice: str | None
     else:
         # Build dynamic update
         parts = []
-        values: list[object] = []
+        values: List[object] = []
         if voice is not None:
             parts.append("voice = ?")
             values.append(voice)
