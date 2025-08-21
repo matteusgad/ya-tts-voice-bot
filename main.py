@@ -21,6 +21,35 @@ url = 'https://tts.api.cloud.yandex.net/speech/v1/tts:synthesize'
 lang = 'ru-RU'
 # Full list can be expanded per Yandex TTS docs
 voices = ['filipp', 'ermil', 'madirus', 'zahar']
+
+# next step: add new voices and emotions really exist
+voices_v1 = {
+
+    'alena': {
+        'speed_options': {'0.8', '1.0', '1.2'},
+        'emotion_options': {'neutral', 'good'}
+    },
+    'ermil': {
+        'speed_options': {'0.8', '1.0', '1.2'},
+        'emotion_options': {'neutral', 'good'}
+    },
+    'jane': {
+        'speed_options': {'0.8', '1.0', '1.2'},
+        'emotion_options': {'neutral', 'good', 'evil'}
+    },
+    'zahar': {
+        'speed_options': {'0.8', '1.0', '1.2'},
+        'emotion_options': {'neutral', 'good'}
+    },
+    'marina': {
+        'speed_options': {'0.8', '1.0', '1.2',},
+        'emotion_options': {'neutral', 'whisper', 'friendly'}
+    },
+    'madi_ru' : False,
+    'filipp': False
+}
+
+
 default_emotion = 'neutral'
 default_speed = 1.0
 text = ''

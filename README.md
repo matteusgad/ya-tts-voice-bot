@@ -69,9 +69,11 @@ CURREENT_DIR = '/opt/ya-tts-voice-bot/'
 - обычный пользователь: `123456789` или `@username` или `username`
 - администратор: `admin:123456789` или `admin:@username` или `admin:username`
 
+Скопируйте `rename.users.allow` в `users.allow` и отредактируйте файл, укажите `id` или `username` администратора бота
+
 Пример:
 ```
-admin:413097979
+admin:0123456789
 @user_one
 user_two
 123456700
